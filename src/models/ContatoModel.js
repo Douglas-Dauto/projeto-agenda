@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const Login = require('../models/LoginModel');
 
 const ContatoSchema = new mongoose.Schema({
+    idLogin: { type: Number, required: true },
     nome: { type: String, required: true },
     sobrenome: { type: String, required: false, default: '' },
     email: { type: String, required: false, default: '' },
@@ -49,6 +51,7 @@ Contato.prototype.cleanUp = function() {
     }
 
     this.body = {
+        idLogin: new Login(null, false).getIdLogin(),
         nome: this.body.nome,
         sobrenome: this.body.sobrenome,
         email: this.body.email,
